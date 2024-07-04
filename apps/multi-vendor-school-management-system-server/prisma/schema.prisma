@@ -1,0 +1,104 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Staff {
+  createdAt DateTime  @default(now())
+  dateHired DateTime?
+  email     String?
+  id        String    @id @default(cuid())
+  name      String?
+  position  String?
+  salary    Float?
+  updatedAt DateTime  @updatedAt
+}
+
+model Message {
+  createdAt      DateTime  @default(now())
+  id             String    @id @default(cuid())
+  messageContent String?
+  receiver       String?
+  sender         String?
+  timestamp      DateTime?
+  updatedAt      DateTime  @updatedAt
+}
+
+model Student {
+  address        String?
+  createdAt      DateTime  @default(now())
+  dateOfBirth    DateTime?
+  email          String?
+  enrollmentDate DateTime?
+  firstName      String?
+  id             String    @id @default(cuid())
+  lastName       String?
+  updatedAt      DateTime  @updatedAt
+}
+
+model Course {
+  courseName  String?
+  createdAt   DateTime @default(now())
+  credits     Int?
+  description String?
+  id          String   @id @default(cuid())
+  schedule    Json?
+  teacher     String?
+  updatedAt   DateTime @updatedAt
+}
+
+model Application {
+  applicantName   String?
+  applicationDate DateTime?
+  comments        String?
+  createdAt       DateTime               @default(now())
+  id              String                 @id @default(cuid())
+  status          EnumApplicationStatus?
+  updatedAt       DateTime               @updatedAt
+}
+
+model Timetable {
+  classRoom String?
+  createdAt DateTime  @default(now())
+  endTime   DateTime?
+  id        String    @id @default(cuid())
+  startTime DateTime?
+  subject   String?
+  updatedAt DateTime  @updatedAt
+}
+
+model Fee {
+  amount      Float?
+  createdAt   DateTime       @default(now())
+  description String?
+  dueDate     DateTime?
+  id          String         @id @default(cuid())
+  status      EnumFeeStatus?
+  updatedAt   DateTime       @updatedAt
+}
+
+model LibraryItem {
+  author             String?
+  availabilityStatus EnumLibraryItemAvailabilityStatus?
+  createdAt          DateTime                           @default(now())
+  id                 String                             @id @default(cuid())
+  publishDate        DateTime?
+  title              String?
+  updatedAt          DateTime                           @updatedAt
+}
+
+enum EnumApplicationStatus {
+  Option1
+}
+
+enum EnumFeeStatus {
+  Option1
+}
+
+enum EnumLibraryItemAvailabilityStatus {
+  Option1
+}
